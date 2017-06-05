@@ -36,41 +36,41 @@ Player.prototype.getMaxHealth = function(){
 };
 
 Player.prototype.checkPack = function(){
-  console.log('This player has: ');
+  console.log(this.name + " is carrying the following items in his/her pack: ");
   for(var i = 0; i < this.getPack().length; i++){
-    console.log(this.getPack()[i]);
+    console.log((i + 1) + ". " + this.getPack()[i].name);
   }
 };
 
 Player.prototype.takeItem = function(item){
   if (this.getPack().length >= 3){
-    console.log("Your pack is full, the " + item.name + " could not be picked up.");
+    console.log(this.name + "'s pack is full, the " + item.name + " could not be picked up.");
     return false;
   } else if (this.getPack().length < 3){
-    console.log("You pick up the " + item.name + " and place it into your pack.");
+    console.log(this.name + " picks up the " + item.name + " and places it into his/her pack.");
     this.getPack().push(item);
+    console.log(this.name + " is carrying the following items in his/her pack: ");
+    for(var i = 0; i < this.getPack().length; i++){
+        console.log((i + 1) + ". " + this.getPack()[i].name);
+      }
     return true;
   }
 };
 
+Player.prototype.discardItem = function(item){
+  if(this.getPack().indexOf(item.name)){
+    var itemPosition = this.getPack().indexOf(item.name);
+    this.getPack().splice(itemPosition, 1);
+    console.log(this.name + " removes the " + item.name + " and has: ");
+    for(var i = 0; i < this.getPack().length; i++){
+        console.log((i + 1) + ". " + this.getPack()[i].name);
+      }
+    return true;
+  } else if(this.getPack().indexOf(item.name) === -1){
+    console.log(this.name + " does not have the " + item.name + ".");
+  }
+};
 
-/**
- * Player Class Method => takeItem(item)
- * -----------------------------
- * Player takes an item from the world and places it into their pack.
- *
- * Player's pack can only hold a maximum of 3 items, so if they try to add more
- *   than that to the pack, return false.
- * Before returning true or false, print a message containing the player's
- *   name and item's name if successful.  Otherwise, print a message saying
- *   that the pack is full so the item could not be stored.
- * Note: The player is allowed to store similar items (items with the same name).
- * You should be able to invoke this function on a Player instance.
- *
- * @name takeItem
- * @param {Item/Weapon/Food} item   The item to take.
- * @return {boolean} true/false     Whether player was able to store item in pack.
- *///return true also console.log(true)
 
 
 /**
