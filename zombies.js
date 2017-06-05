@@ -7,14 +7,19 @@ function Weapon(name, damage){
  Item.call(this, name);
 }
 
-Weapon.prototype  = new Item();
+
+Weapon.prototype  = Object.create(Item.prototype, {
+  constructor: Weapon
+});
 
 function Food(name, energy){
   this.energy = energy;
   Item.call(this, name);
 }
 
-Food.prototype = new Item();
+Food.prototype = Object.create(Item.prototype, {
+  constructor: Food
+});
 
 function Player(name, health, strength, speed){
   this.name = name;
@@ -58,15 +63,15 @@ Player.prototype.takeItem = function(item){
 };
 
 Player.prototype.discardItem = function(item){
-  if(this.getPack().indexOf(item.name)){
-    var itemPosition = this.getPack().indexOf(item.name);
+  if(this.getPack().indexOf(item) !== -1){
+    var itemPosition = this.getPack().indexOf(item);
     this.getPack().splice(itemPosition, 1);
     console.log(this.name + " removes the " + item.name + " and has: ");
     for(var i = 0; i < this.getPack().length; i++){
         console.log((i + 1) + ". " + this.getPack()[i].name);
       }
     return true;
-  } else if(this.getPack().indexOf(item.name) === -1){
+  } else if(this.getPack().indexOf(item) === -1){
     console.log(this.name + " does not have the " + item.name + ".");
   }
 };
