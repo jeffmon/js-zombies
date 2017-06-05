@@ -39,6 +39,7 @@
  * Weapon Extends Item Class
  * -----------------------------
  */
+ Weapon.prototype  = new Item();
 
 
 
@@ -57,13 +58,16 @@
  * @param {number} energy     The energy the food provides.
  * @property {number} energy
  */
-
+function Food(name, energy){
+  this.energy = energy;
+  Item.call(this, name);
+}
 
 /**
  * Food Extends Item Class
  * -----------------------------
  */
-
+Food.prototype = new Item();
 
 
 /**
@@ -88,9 +92,22 @@
  * @property {method} getMaxHealth         Returns private variable `maxHealth`.
  */
 
-function Player(){
+function Player(name, health, strength, speed){
+  this.name = name;
+  this.health = health;
+  this.strength = strength;
+  this.speed = speed;
+  this._maxHealth = health;
+  this.isAlive = true;
+  this.equipped = false;
   this._pack = [];
 }
+Player.prototype.getPack = function(){
+  return this._pack;
+};
+Player.prototype.getMaxHealth = function(){
+  return this._maxHealth;
+};
 
 /**
  * Player Class Method => checkPack()
@@ -103,6 +120,13 @@ function Player(){
  *
  * @name checkPack
  */
+Player.prototype.checkPack = function(){
+  console.log('This player has: ');
+  for(var i = 0; i < this.getPack().length; i++){
+    console.log(this.getPack()[i]);
+  }
+};
+
 
 
 /**
