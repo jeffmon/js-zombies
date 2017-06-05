@@ -1,96 +1,20 @@
-/**
- * Class => Item(name)
- * -----------------------------
- * Creates an item.
- *
- * @name Item
- * @param {string} name     The item's name.
- * @property {string} name
- */
+function Item(name){
+ this.name = name;
+}
 
- function Item(name){
-  this.name = name;
- }
+function Weapon(name, damage){
+ this.damage = damage;
+ Item.call(this, name);
+}
 
+Weapon.prototype  = new Item();
 
-/**
- * Class => Weapon(name, damage)
- * -----------------------------
- * Creates a weapon item.
- * Weapon items can be equipped for use in battle.
- *
- * The Weapon class constructor will call
- *   the super class (Item) constructor
- *   while passing in the 1 Item constructor param
- *
- * @name Weapon
- * @param {string} name     The weapon's name.
- * @param {number} damage   The weapon's damage.
- * @property {number} damage
- */
-
- function Weapon(name, damage){
-  this.damage = damage;
-  Item.call(this, name);
- }
-
-
-/**
- * Weapon Extends Item Class
- * -----------------------------
- */
- Weapon.prototype  = new Item();
-
-
-
-/**
- * Class => Food(name, energy)
- * -----------------------------
- * Creates a food item.
- * Food items give energy, restoring health to the player.
- *
- * The Food class constructor will call
- *   the super class (Item) constructor
- *   while passing in the 1 Item constructor param
- *
- * @name Food
- * @param {string} name       The food's name.
- * @param {number} energy     The energy the food provides.
- * @property {number} energy
- */
 function Food(name, energy){
   this.energy = energy;
   Item.call(this, name);
 }
 
-/**
- * Food Extends Item Class
- * -----------------------------
- */
 Food.prototype = new Item();
-
-
-/**
- * Class => Player(name, health, strength, speed)
- * -----------------------------
- * Creates a player in a zombie-infested world.
- *
- * @name Player
- * @param {string} name                    The player's name.
- * @param {number} health                  The player's health.
- * @param {number} strength                The player's strength.
- * @param {number} speed                   The player's speed.
- * @private {array} pack                   Default value should be empty.
- * @private {number} maxHealth             Default value should be set to `health`.
- * @property {string} name
- * @property {number} health
- * @property {number} strength
- * @property {number} speed
- * @property {boolean} isAlive             Default value should be `true`.
- * @property {Weapon/boolean} equipped     Default value should be `false`.
- * @property {method} getPack              Returns private variable `pack`.
- * @property {method} getMaxHealth         Returns private variable `maxHealth`.
- */
 
 function Player(name, health, strength, speed){
   this.name = name;
@@ -102,24 +26,15 @@ function Player(name, health, strength, speed){
   this.equipped = false;
   this._pack = [];
 }
+
 Player.prototype.getPack = function(){
   return this._pack;
 };
+
 Player.prototype.getMaxHealth = function(){
   return this._maxHealth;
 };
 
-/**
- * Player Class Method => checkPack()
- * -----------------------------
- * Player checks the contents of their pack.
- *
- * Nicely format and print the items in the player's pack.
- * To access the pack, be sure to use Player's getPack method.
- * You should be able to invoke this function on a Player instance.
- *
- * @name checkPack
- */
 Player.prototype.checkPack = function(){
   console.log('This player has: ');
   for(var i = 0; i < this.getPack().length; i++){
@@ -127,6 +42,16 @@ Player.prototype.checkPack = function(){
   }
 };
 
+Player.prototype.takeItem = function(item){
+  if (this.getPack().length >= 3){
+    console.log("Your pack is full, the " + item.name + " could not be picked up.");
+    return false;
+  } else if (this.getPack().length < 3){
+    console.log("You pick up the " + item.name + " and place it into your pack.");
+    this.getPack().push(item);
+    return true;
+  }
+};
 
 
 /**
