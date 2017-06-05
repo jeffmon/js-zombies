@@ -8,6 +8,10 @@
  * @property {string} name
  */
 
+ function Item(name){
+  this.name = name;
+ }
+
 
 /**
  * Class => Weapon(name, damage)
@@ -24,6 +28,11 @@
  * @param {number} damage   The weapon's damage.
  * @property {number} damage
  */
+
+ function Weapon(name, damage){
+  this.damage = damage;
+  Item.call(this, name);
+ }
 
 
 /**
@@ -79,6 +88,9 @@
  * @property {method} getMaxHealth         Returns private variable `maxHealth`.
  */
 
+function Player(){
+  this._pack = [];
+}
 
 /**
  * Player Class Method => checkPack()
@@ -109,7 +121,7 @@
  * @name takeItem
  * @param {Item/Weapon/Food} item   The item to take.
  * @return {boolean} true/false     Whether player was able to store item in pack.
- */
+ *///return true also console.log(true)
 
 
 /**
