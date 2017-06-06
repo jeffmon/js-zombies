@@ -30,6 +30,7 @@ function Player(name, health, strength, speed){
   this.isAlive = true;
   this.equipped = false;
   this._pack = [];
+  this.weaponEquipped = [];
 }
 
 Player.prototype.getPack = function(){
@@ -77,33 +78,15 @@ Player.prototype.discardItem = function(item){
   }
 };
 
+Player.prototype.equip = function(itemToEquip){
+  if(this.weaponEquipped.length === 0 && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
+    var itemPosition = this.getPack().indexOf(itemToEquip);
+    this.getPack().splice(itemPosition, 1);
+    this.weaponEquipped.push(itemToEquip);
+    console.log(this.name + " wields a " + itemToEquip.name + ".");
+  }
+};
 
-
-/**
- * Player Class Method => discardItem(item)
- * -----------------------------
- * Player discards an item from their pack.
- *
- * Use Array's indexOf method to check if the pack contains the item.
- * If an item is not found in the pack, indexOf returns -1.
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
- *
- * If the item is in the pack, remove it from the pack using Array's splice method.
- * Print the player and item names and a message saying the item was discarded.
- * Return true for the successful discard.
- * Note: The splice method can also be used for array element replacement.
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
- *
- * If the item is not in the pack, return a message with the item name saying
- *   nothing was discarded since the item could not be found.
- * Return false in this case.
- *
- * You should be able to invoke this function on a Player instance.
- *
- * @name discardItem
- * @param {Item/Weapon/Food} item   The item to discard.
- * @return {boolean} true/false     Whether player was able to remove item from pack.
- */
 
 
 /**
