@@ -121,19 +121,16 @@ Player.prototype.eat = function(itemToEat){
   }
 };
 
-/**
- * Player Class Method => useItem(item)
- * -----------------------------
- * Player uses an item from the pack.
- *
- * If the item is a weapon, the player should equip the item.
- * If the item is food, the player should eat the item.
- * You should be able to invoke this function on a Player instance.
- *
- * @name useItem
- * @param {Item/Weapon/Food} item   The item to use.
- */
-
+Player.prototype.useItem = function(item){
+  if (item instanceof Food){
+    this.eat(item);
+  } else if (item instanceof Weapon){
+    this.equip(item);
+  } else if (this.getPack().indexOf(item) === -1){
+    console.log(this.name + " does not have that " + item.name + "!");
+    return false;
+  }
+};
 
 /**
  * Player Class Method => equippedWith()
