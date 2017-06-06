@@ -175,28 +175,13 @@ RangedZombie.prototype  = Object.create(Zombie.prototype, {
   constructor: RangedZombie
 });
 
+function ExplodingZombie(health, strength, speed){
+  Zombie.call(this, health, strength, speed);
+}
 
-/**
- * Class => ExplodingZombie(health, strength, speed)
- * -----------------------------
- * Creates an exploding zombie.
- *
- * The ExplodingZombie class constructor will call
- *   the super class (Zombie) constructor
- *   while passing in the 3 Zombie constructor params
- *
- * @name ExplodingZombie
- * @param {number} health           The zombie's health.
- * @param {number} strength         The zombie's strength.
- * @param {number} speed            The zombie's speed.
- */
-
-
-/**
- * ExplodingZombie Extends Zombie Class
- * -----------------------------
- */
-
+ExplodingZombie.prototype  = Object.create(Zombie.prototype, {
+  constructor: ExplodingZombie
+});
 
 
 
