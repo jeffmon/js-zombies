@@ -142,21 +142,15 @@ Player.prototype.equippedWith = function(){
   }
 };
 
-/**
- * Class => Zombie(health, strength, speed)
- * -----------------------------
- * Creates a normal zombie.
- *
- * @name Zombie
- * @param {number} health           The zombie's health.
- * @param {number} strength         The zombie's strength.
- * @param {number} speed            The zombie's speed.
- * @private {number} maxHealth      Default value should be set to `health`.
- * @property {number} health
- * @property {number} strength
- * @property {number} speed
- * @property {boolean} isAlive      Default value should be `true`.
- */
+function Zombie(health, strength, speed){
+  this.name = name;
+  this.health = health;
+  this.strength = strength;
+  this.speed = speed;
+  this._maxHealth = health;
+  this.isAlive = true;
+}
+
 
 
 /**
