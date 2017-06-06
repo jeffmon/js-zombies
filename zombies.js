@@ -132,20 +132,15 @@ Player.prototype.useItem = function(item){
   }
 };
 
-/**
- * Player Class Method => equippedWith()
- * -----------------------------
- * Player checks their equipment.
- *
- * Prints the player's name and equipped weapon's name.
- * If nothing is equipped, prints a message saying so.
- * Also returns the equipped weapon's name or false if nothing is equipped.
- * You should be able to invoke this function on a Player instance.
- *
- * @name equippedWith
- * @return {string/boolean}   Weapon name or false if nothing is equipped.
- */
-
+Player.prototype.equippedWith = function(){
+  if(this.equipped !== false){
+    console.log(this.name + " is holding a " + this.equipped.name + " in his/her hand!");
+    return this.equipped.name;
+  } else if(this.equipped === false){
+    console.log(this.name + " is currently holding nothing in his hand!");
+    return false;
+  }
+};
 
 /**
  * Class => Zombie(health, strength, speed)
