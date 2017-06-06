@@ -66,13 +66,14 @@ Player.prototype.discardItem = function(item){
   if(this.getPack().indexOf(item) !== -1){
     var itemPosition = this.getPack().indexOf(item);
     this.getPack().splice(itemPosition, 1);
-    console.log(this.name + " removes the " + item.name + " and has: ");
+    console.log(this.name + " removes the " + item.name + " and has the following left in his/her pack: ");
     for(var i = 0; i < this.getPack().length; i++){
         console.log((i + 1) + ". " + this.getPack()[i].name);
       }
     return true;
   } else if(this.getPack().indexOf(item) === -1){
     console.log(this.name + " does not have the " + item.name + ".");
+    return false;
   }
 };
 
