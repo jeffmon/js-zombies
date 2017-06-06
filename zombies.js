@@ -83,7 +83,7 @@ Player.prototype.equip = function(itemToEquip){
   if (this.equipped === false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
     var itemPosition = this.getPack().indexOf(itemToEquip);
     this.getPack().splice(itemPosition, 1);
-    this.equipped = itemToEquip
+    this.equipped = itemToEquip;
     this.equipped = itemToEquip;
     console.log(this.name + " wields a " + itemToEquip.name + ".");
     return true;
@@ -103,25 +103,23 @@ Player.prototype.equip = function(itemToEquip){
   }
 };
 
-/**
- * Player Class Method => eat(itemToEat)
- * -----------------------------
- * Player eats a food item, restoring their health.
- *
- * Player can only eat Food instances.
- * Player can only eat food items from their pack.
- *
- * Remove itemToEat from the pack.
- * Increase the player's health by the food's energy amount, but do not
- *   exceed the player's max health.  If exceeded, simply set player's health
- *   to max health instead.
- * To access the player's max health, be sure to use Player's getMaxHealth method.
- * You should be able to invoke this function on a Player instance.
- *
- * @name eat
- * @param {Food} itemToEat  The food item to eat.
- */
-
+Player.prototype.eat = function(itemToEat){
+  if (itemToEat instanceof Food && this.getPack().indexOf(itemToEat) !== -1){
+    console.log(this.name + " eats a " + itemToEat.name + " from his/her pack and gains " + itemToEat.energy + " health!");
+    var itemPosition = this.getPack().indexOf(itemToEat);
+    this.getPack().splice(itemPosition, 1);
+    this.health += itemToEat.energy;
+    if(this.health > this.getMaxHealth()){
+      this.health = this.getMaxHealth();
+    }
+    return true;
+  } else if (itemToEat instanceof Food !== true){
+    console.log(this.name + " cannot eat that " + itemToEat.name + "! It's not edible!");
+    return false;
+  } else if (this.getPack().indexOf(itemToEat) === -1){
+    console.log(this.name + " does not have a " + itemToEat.name + " in his/her pack!");
+  }
+};
 
 /**
  * Player Class Method => useItem(item)
