@@ -41,6 +41,7 @@ Player.prototype.getMaxHealth = function(){
   return this._maxHealth;
 };
 
+
 Player.prototype.checkPack = function(){
   console.log(this.name + " is carrying the following items in his/her pack: ");
   for(var i = 0; i < this.getPack().length; i++){
@@ -79,36 +80,28 @@ Player.prototype.discardItem = function(item){
 };
 
 Player.prototype.equip = function(itemToEquip){
-  if(this.weaponEquipped.length === 0 && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
+  if (this.equipped === false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
     var itemPosition = this.getPack().indexOf(itemToEquip);
     this.getPack().splice(itemPosition, 1);
-    this.weaponEquipped.push(itemToEquip);
+    this.equipped = itemToEquip
+    this.equipped = itemToEquip;
     console.log(this.name + " wields a " + itemToEquip.name + ".");
+    return true;
+  } else if (this.equipped !== false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
+    console.log(this.name + " puts a " + this.equipped.name + " into his pack and wields a " + itemToEquip.name + ".");
+    var itemPosition = this.getPack().indexOf(itemToEquip);
+    var equippedWeapon = this.equipped;
+    this.equipped = this.getPack()[itemPosition];
+    this.getPack().splice(itemPosition, 1, equippedWeapon);
+    return true;
+  } else if (itemToEquip instanceof Weapon === false && this.getPack().indexOf(itemToEquip !== -1)){
+    console.log("That " + itemToEquip.name + " is not a weapon!");
+    return false;
+  } else if (this.getPack().indexOf(itemToEquip) === -1){
+    console.log(this.name + " does not have a " + itemToEquip.name + " in his/her pack!");
+    return false;
   }
 };
-
-
-
-/**
- * Player Class Method => equip(itemToEquip)
- * -----------------------------
- * Player equips a weapon item.
- *
- * Player can only equip Weapon instances.
- * Player can only equip weapon items from their pack.
- *
- * If the player already has a weapon equipped (the equipped property
- *   is set to an Item), find the itemToEquip in the pack and replace
- *   it with the currently equipped item.  Then set the equipped property
- *   to the itemToEquip.
- * However, if the player doesn't already have a weapon equipped, simply
- *   equip that item and remove it from the pack.
- * You should be able to invoke this function on a Player instance.
- *
- * @name equip
- * @param {Weapon} itemToEquip  The weapon item to equip.
- */
-
 
 /**
  * Player Class Method => eat(itemToEat)
