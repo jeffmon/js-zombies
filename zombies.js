@@ -80,16 +80,14 @@ Player.prototype.discardItem = function(item){
 };
 
 Player.prototype.equip = function(itemToEquip){
+  var itemPosition = this.getPack().indexOf(itemToEquip);
   if (this.equipped === false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
-    var itemPosition = this.getPack().indexOf(itemToEquip);
     this.getPack().splice(itemPosition, 1);
-    this.equipped = itemToEquip;
     this.equipped = itemToEquip;
     console.log(this.name + " wields a " + itemToEquip.name + ".");
     return true;
   } else if (this.equipped !== false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
     console.log(this.name + " puts a " + this.equipped.name + " into his pack and wields a " + itemToEquip.name + ".");
-    var itemPosition = this.getPack().indexOf(itemToEquip);
     var equippedWeapon = this.equipped;
     this.equipped = this.getPack()[itemPosition];
     this.getPack().splice(itemPosition, 1, equippedWeapon);
@@ -137,7 +135,7 @@ Player.prototype.equippedWith = function(){
     console.log(this.name + " is holding a " + this.equipped.name + " in his/her hand!");
     return this.equipped.name;
   } else if(this.equipped === false){
-    console.log(this.name + " is currently holding nothing in his hand!");
+    console.log(this.name + " is currently holding nothing in his/her hand!");
     return false;
   }
 };
@@ -184,44 +182,39 @@ ExplodingZombie.prototype  = Object.create(Zombie.prototype, {
 });
 
 
-
-/**
- * Sample run.
- * Feel free to edit this and check your game logic.
- */
 function runGame() {
-  // var player = new Player("Joan", 500, 30, 70);
-  // var zombie = new Zombie(40, 50, 20);
-  // var charger = new FastZombie(175, 25, 60);
-  // var tank = new StrongZombie(250, 100, 15);
-  // var spitter = new RangedZombie(150, 20, 20);
-  // var boomer = new ExplodingZombie(50, 15, 10);
+  var player = new Player("Joan", 500, 30, 70);
+  var zombie = new Zombie(40, 50, 20);
+  var charger = new FastZombie(175, 25, 60);
+  var tank = new StrongZombie(250, 100, 15);
+  var spitter = new RangedZombie(150, 20, 20);
+  var boomer = new ExplodingZombie(50, 15, 10);
 
-  // var shovel = new Weapon("shovel", 15);
-  // var sandwich = new Food("sandwich", 30);
-  // var chainsaw = new Weapon("chainsaw", 25);
+  var shovel = new Weapon("shovel", 15);
+  var sandwich = new Food("sandwich", 30);
+  var chainsaw = new Weapon("chainsaw", 25);
 
-  // player.takeItem(shovel);
-  // player.takeItem(sandwich);
-  // player.takeItem(chainsaw);
-  // player.discardItem(new Weapon("scythe", 21));
-  // player.discardItem(shovel);
-  // player.checkPack();
-  // player.takeItem(shovel);
-  // player.checkPack();
+  player.takeItem(shovel);
+  player.takeItem(sandwich);
+  player.takeItem(chainsaw);
+  player.discardItem(new Weapon("scythe", 21));
+  player.discardItem(shovel);
+  player.checkPack();
+  player.takeItem(shovel);
+  player.checkPack();
 
-  // player.equippedWith();
-  // player.useItem(chainsaw);
-  // player.equippedWith();
-  // player.checkPack();
+  player.equippedWith();
+  player.useItem(chainsaw);
+  player.equippedWith();
+  player.checkPack();
 
-  // player.useItem(shovel);
-  // player.equippedWith();
-  // player.checkPack();
+  player.useItem(shovel);
+  player.equippedWith();
+  player.checkPack();
 
-  // player.health = 487;
-  // console.log("Before health: " + player.health);
-  // player.useItem(sandwich);
-  // console.log("After health: " + player.health);
-  // player.checkPack();
+  player.health = 487;
+  console.log("Before health: " + player.health);
+  player.useItem(sandwich);
+  console.log("After health: " + player.health);
+  player.checkPack();
 }
