@@ -80,7 +80,7 @@ class Player{
 
   equip(itemToEquip){
     var itemPosition = this.getPack().indexOf(itemToEquip);
-    if (this.equipped === false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
+    if (!this.equipped && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
       this.getPack().splice(itemPosition, 1);
       this.equipped = itemToEquip;
       console.log(this.name + " wields a " + itemToEquip.name + ".");
@@ -91,7 +91,7 @@ class Player{
       this.equipped = this.getPack()[itemPosition];
       this.getPack().splice(itemPosition, 1, equippedWeapon);
       return true;
-    } else if (itemToEquip instanceof Weapon === false && this.getPack().indexOf(itemToEquip !== -1)){
+    } else if (!itemToEquip instanceof Weapon && this.getPack().indexOf(itemToEquip !== -1)){
       console.log("That " + itemToEquip.name + " is not a weapon!");
       return false;
     } else if (this.getPack().indexOf(itemToEquip) === -1){
@@ -133,7 +133,7 @@ class Player{
     if(this.equipped !== false){
       console.log(this.name + " is holding a " + this.equipped.name + " in his/her hand!");
       return this.equipped.name;
-    } else if(this.equipped === false){
+    } else if(!this.equipped){
       console.log(this.name + " is currently holding nothing in his/her hand!");
       return false;
     }
