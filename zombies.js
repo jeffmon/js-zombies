@@ -63,29 +63,26 @@ class Player{
     }
   }
 
-
-
+  discardItem(item){
+   if(this.getPack().indexOf(item) !== -1){
+     var itemPosition = this.getPack().indexOf(item);
+     this.getPack().splice(itemPosition, 1);
+     console.log(this.name + " removes the " + item.name + " and has the following left in his/her pack: ");
+     for(var i = 0; i < this.getPack().length; i++){
+         console.log((i + 1) + ". " + this.getPack()[i].name);
+       }
+     return true;
+    } else if(this.getPack().indexOf(item) === -1){
+      console.log(this.name + " does not have the " + item.name + ".");
+      return false;
+    }
+  }
 
 }
 
 
 
 /*
-
-Player.prototype.takeItem = function(item){
-  if (this.getPack().length >= 3){
-    console.log(this.name + "'s pack is full, the " + item.name + " could not be picked up.");
-    return false;
-  } else if (this.getPack().length < 3){
-    console.log(this.name + " picks up the " + item.name + " and places it into his/her pack.");
-    this.getPack().push(item);
-    console.log(this.name + " is carrying the following items in his/her pack: ");
-    for(var i = 0; i < this.getPack().length; i++){
-        console.log((i + 1) + ". " + this.getPack()[i].name);
-      }
-    return true;
-  }
-};
 
 Player.prototype.discardItem = function(item){
   if(this.getPack().indexOf(item) !== -1){
