@@ -150,23 +150,13 @@ class Zombie{
   }
 }
 
-
-/*function Zombie(health, strength, speed){
-  this.name = name;
-  this.health = health;
-  this.strength = strength;
-  this.speed = speed;
-  this._maxHealth = health;
-  this.isAlive = true;
+class FastZombie extends Zombie {
+  constructor(health, strength, speed){
+    super(health, strength, speed);
+  }
 }
 
-function FastZombie(health, strength, speed){
-  Zombie.call(this, health, strength, speed);
-}
 
-FastZombie.prototype  = Object.create(Zombie.prototype, {
-  constructor: FastZombie
-});
 
 function StrongZombie(health, strength, speed){
   Zombie.call(this, health, strength, speed);
