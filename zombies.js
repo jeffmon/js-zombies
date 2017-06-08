@@ -118,6 +118,18 @@ class Player{
     }
   }
 
+  useItem(item){
+    if (item instanceof Food){
+      this.eat(item);
+    } else if (item instanceof Weapon){
+      this.equip(item);
+    } else if (this.getPack().indexOf(item) === -1){
+      console.log(this.name + " does not have that " + item.name + "!");
+      return false;
+    }
+  }
+
+
 
 }
 
@@ -125,23 +137,6 @@ class Player{
 
 /*
 
-Player.prototype.eat = function(itemToEat){
-  if (itemToEat instanceof Food && this.getPack().indexOf(itemToEat) !== -1){
-    console.log(this.name + " eats a " + itemToEat.name + " from his/her pack and gains " + itemToEat.energy + " health!");
-    var itemPosition = this.getPack().indexOf(itemToEat);
-    this.getPack().splice(itemPosition, 1);
-    this.health += itemToEat.energy;
-    if(this.health > this.getMaxHealth()){
-      this.health = this.getMaxHealth();
-    }
-    return true;
-  } else if (itemToEat instanceof Food !== true){
-    console.log(this.name + " cannot eat that " + itemToEat.name + "! It's not edible!");
-    return false;
-  } else if (this.getPack().indexOf(itemToEat) === -1){
-    console.log(this.name + " does not have a " + itemToEat.name + " in his/her pack!");
-  }
-};
 
 Player.prototype.useItem = function(item){
   if (item instanceof Food){
