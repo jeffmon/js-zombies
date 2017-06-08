@@ -138,13 +138,20 @@ class Player{
       return false;
     }
   }
+}
 
-
-
+class Zombie{
+  constructor(health, strength, speed){
+    this.health = health;
+    this.strength = strength;
+    this.speed = speed;
+    this._maxHealth = health;
+    this.isAlive = true;
+  }
 }
 
 
-function Zombie(health, strength, speed){
+/*function Zombie(health, strength, speed){
   this.name = name;
   this.health = health;
   this.strength = strength;
@@ -183,7 +190,7 @@ function ExplodingZombie(health, strength, speed){
 
 ExplodingZombie.prototype  = Object.create(Zombie.prototype, {
   constructor: ExplodingZombie
-});
+});*/
 
 function runGame() {
   var player = new Player("Joan", 500, 30, 70);
