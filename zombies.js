@@ -79,27 +79,44 @@ class Player{
   }
 
   equip(itemToEquip){
-  var itemPosition = this.getPack().indexOf(itemToEquip);
-  if (this.equipped === false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
-    this.getPack().splice(itemPosition, 1);
-    this.equipped = itemToEquip;
-    console.log(this.name + " wields a " + itemToEquip.name + ".");
-    return true;
-  } else if (this.equipped !== false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
-    console.log(this.name + " puts a " + this.equipped.name + " into his pack and wields a " + itemToEquip.name + ".");
-    var equippedWeapon = this.equipped;
-    this.equipped = this.getPack()[itemPosition];
-    this.getPack().splice(itemPosition, 1, equippedWeapon);
-    return true;
-  } else if (itemToEquip instanceof Weapon === false && this.getPack().indexOf(itemToEquip !== -1)){
-    console.log("That " + itemToEquip.name + " is not a weapon!");
-    return false;
-  } else if (this.getPack().indexOf(itemToEquip) === -1){
-    console.log(this.name + " does not have a " + itemToEquip.name + " in his/her pack!");
-    return false;
+    var itemPosition = this.getPack().indexOf(itemToEquip);
+    if (this.equipped === false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
+      this.getPack().splice(itemPosition, 1);
+      this.equipped = itemToEquip;
+      console.log(this.name + " wields a " + itemToEquip.name + ".");
+      return true;
+    } else if (this.equipped !== false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
+      console.log(this.name + " puts a " + this.equipped.name + " into his pack and wields a " + itemToEquip.name + ".");
+      var equippedWeapon = this.equipped;
+      this.equipped = this.getPack()[itemPosition];
+      this.getPack().splice(itemPosition, 1, equippedWeapon);
+      return true;
+    } else if (itemToEquip instanceof Weapon === false && this.getPack().indexOf(itemToEquip !== -1)){
+      console.log("That " + itemToEquip.name + " is not a weapon!");
+      return false;
+    } else if (this.getPack().indexOf(itemToEquip) === -1){
+      console.log(this.name + " does not have a " + itemToEquip.name + " in his/her pack!");
+      return false;
+    }
   }
-}
 
+  eat(itemToEat){
+    if (itemToEat instanceof Food && this.getPack().indexOf(itemToEat) !== -1){
+      console.log(this.name + " eats a " + itemToEat.name + " from his/her pack and gains " + itemToEat.energy + " health!");
+      var itemPosition = this.getPack().indexOf(itemToEat);
+      this.getPack().splice(itemPosition, 1);
+      this.health += itemToEat.energy;
+      if(this.health > this.getMaxHealth()){
+        this.health = this.getMaxHealth();
+      }
+      return true;
+    } else if (itemToEat instanceof Food !== true){
+      console.log(this.name + " cannot eat that " + itemToEat.name + "! It's not edible!");
+      return false;
+    } else if (this.getPack().indexOf(itemToEat) === -1){
+      console.log(this.name + " does not have a " + itemToEat.name + " in his/her pack!");
+    }
+  }
 
 
 }
@@ -107,28 +124,6 @@ class Player{
 
 
 /*
-
-Player.prototype.equip = function(itemToEquip){
-  var itemPosition = this.getPack().indexOf(itemToEquip);
-  if (this.equipped === false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
-    this.getPack().splice(itemPosition, 1);
-    this.equipped = itemToEquip;
-    console.log(this.name + " wields a " + itemToEquip.name + ".");
-    return true;
-  } else if (this.equipped !== false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
-    console.log(this.name + " puts a " + this.equipped.name + " into his pack and wields a " + itemToEquip.name + ".");
-    var equippedWeapon = this.equipped;
-    this.equipped = this.getPack()[itemPosition];
-    this.getPack().splice(itemPosition, 1, equippedWeapon);
-    return true;
-  } else if (itemToEquip instanceof Weapon === false && this.getPack().indexOf(itemToEquip !== -1)){
-    console.log("That " + itemToEquip.name + " is not a weapon!");
-    return false;
-  } else if (this.getPack().indexOf(itemToEquip) === -1){
-    console.log(this.name + " does not have a " + itemToEquip.name + " in his/her pack!");
-    return false;
-  }
-};
 
 Player.prototype.eat = function(itemToEat){
   if (itemToEat instanceof Food && this.getPack().indexOf(itemToEat) !== -1){
