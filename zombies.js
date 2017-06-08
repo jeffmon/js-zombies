@@ -162,23 +162,15 @@ class StrongZombie extends Zombie {
   }
 }
 
+class RangedZombie extends Zombie {
+  constructor(health, strength, speed){
+    super(health, strength, speed);
+  }
+}
+
 /*
 
-function StrongZombie(health, strength, speed){
-  Zombie.call(this, health, strength, speed);
-}
 
-StrongZombie.prototype  = Object.create(Zombie.prototype, {
-  constructor: StrongZombie
-});
-
-function RangedZombie(health, strength, speed){
-  Zombie.call(this, health, strength, speed);
-}
-
-RangedZombie.prototype  = Object.create(Zombie.prototype, {
-  constructor: RangedZombie
-});
 
 function ExplodingZombie(health, strength, speed){
   Zombie.call(this, health, strength, speed);
