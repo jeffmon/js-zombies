@@ -129,35 +129,20 @@ class Player{
     }
   }
 
+  equippedWith(){
+    if(this.equipped !== false){
+      console.log(this.name + " is holding a " + this.equipped.name + " in his/her hand!");
+      return this.equipped.name;
+    } else if(this.equipped === false){
+      console.log(this.name + " is currently holding nothing in his/her hand!");
+      return false;
+    }
+  }
+
 
 
 }
 
-
-
-/*
-
-
-Player.prototype.useItem = function(item){
-  if (item instanceof Food){
-    this.eat(item);
-  } else if (item instanceof Weapon){
-    this.equip(item);
-  } else if (this.getPack().indexOf(item) === -1){
-    console.log(this.name + " does not have that " + item.name + "!");
-    return false;
-  }
-};
-
-Player.prototype.equippedWith = function(){
-  if(this.equipped !== false){
-    console.log(this.name + " is holding a " + this.equipped.name + " in his/her hand!");
-    return this.equipped.name;
-  } else if(this.equipped === false){
-    console.log(this.name + " is currently holding nothing in his/her hand!");
-    return false;
-  }
-};*/
 
 function Zombie(health, strength, speed){
   this.name = name;
