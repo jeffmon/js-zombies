@@ -41,17 +41,36 @@ class Player{
     return this._maxHealth;
   }
 
+  checkPack(){
+    console.log(this.name + " is carrying the following items in his/her pack: ");
+    for(var i = 0; i < this.getPack().length; i++){
+      console.log((i + 1) + ". " + this.getPack()[i].name);
+    }
+  }
+
+  takeItem(item){
+    if (this.getPack().length >= 3){
+     console.log(this.name + "'s pack is full, the " + item.name + " could not be picked up.");
+     return false;
+    } else if (this.getPack().length < 3){
+        console.log(this.name + " picks up the " + item.name + " and places it into his/her pack.");
+        this.getPack().push(item);
+        console.log(this.name + " is carrying the following items in his/her pack: ");
+       for(var i = 0; i < this.getPack().length; i++){
+          console.log((i + 1) + ". " + this.getPack()[i].name);
+       }
+      return true;
+    }
+  }
+
+
+
 
 }
 
 
 
-Player.prototype.checkPack = function(){
-  console.log(this.name + " is carrying the following items in his/her pack: ");
-  for(var i = 0; i < this.getPack().length; i++){
-    console.log((i + 1) + ". " + this.getPack()[i].name);
-  }
-};
+/*
 
 Player.prototype.takeItem = function(item){
   if (this.getPack().length >= 3){
@@ -142,7 +161,7 @@ Player.prototype.equippedWith = function(){
     console.log(this.name + " is currently holding nothing in his/her hand!");
     return false;
   }
-};
+};*/
 
 function Zombie(health, strength, speed){
   this.name = name;
