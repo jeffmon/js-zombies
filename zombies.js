@@ -78,26 +78,35 @@ class Player{
     }
   }
 
+  equip(itemToEquip){
+  var itemPosition = this.getPack().indexOf(itemToEquip);
+  if (this.equipped === false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
+    this.getPack().splice(itemPosition, 1);
+    this.equipped = itemToEquip;
+    console.log(this.name + " wields a " + itemToEquip.name + ".");
+    return true;
+  } else if (this.equipped !== false && this.getPack().indexOf(itemToEquip) !== -1 && itemToEquip instanceof Weapon){
+    console.log(this.name + " puts a " + this.equipped.name + " into his pack and wields a " + itemToEquip.name + ".");
+    var equippedWeapon = this.equipped;
+    this.equipped = this.getPack()[itemPosition];
+    this.getPack().splice(itemPosition, 1, equippedWeapon);
+    return true;
+  } else if (itemToEquip instanceof Weapon === false && this.getPack().indexOf(itemToEquip !== -1)){
+    console.log("That " + itemToEquip.name + " is not a weapon!");
+    return false;
+  } else if (this.getPack().indexOf(itemToEquip) === -1){
+    console.log(this.name + " does not have a " + itemToEquip.name + " in his/her pack!");
+    return false;
+  }
+}
+
+
+
 }
 
 
 
 /*
-
-Player.prototype.discardItem = function(item){
-  if(this.getPack().indexOf(item) !== -1){
-    var itemPosition = this.getPack().indexOf(item);
-    this.getPack().splice(itemPosition, 1);
-    console.log(this.name + " removes the " + item.name + " and has the following left in his/her pack: ");
-    for(var i = 0; i < this.getPack().length; i++){
-        console.log((i + 1) + ". " + this.getPack()[i].name);
-      }
-    return true;
-  } else if(this.getPack().indexOf(item) === -1){
-    console.log(this.name + " does not have the " + item.name + ".");
-    return false;
-  }
-};
 
 Player.prototype.equip = function(itemToEquip){
   var itemPosition = this.getPack().indexOf(itemToEquip);
