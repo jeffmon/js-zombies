@@ -168,19 +168,11 @@ class RangedZombie extends Zombie {
   }
 }
 
-/*
-
-
-
-function ExplodingZombie(health, strength, speed){
-  Zombie.call(this, health, strength, speed);
+class ExplodingZombie extends Zombie {
+  constructor(health, strength, speed){
+    super(health, strength, speed);
+  }
 }
-
-ExplodingZombie.prototype  = Object.create(Zombie.prototype, {
-  constructor: ExplodingZombie
-});
-
-*/
 
 function runGame() {
   var player = new Player("Joan", 500, 30, 70);
